@@ -1,0 +1,36 @@
+name: "Housekeeping Workflow"
+
+on:
+  schedule:
+    - cron: '0 0 * * SUN' # Every sunday at 00:00
+
+env:
+  OPW_VAULT: user/app
+  DOCKERFILE: ./.config/Dockerfile
+
+jobs:
+  stale-food:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Stale Branches
+        uses: crs-k/stale-branches@v7.0.0
+  latest-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Load secret
+        uses: 1password/load-secrets-action@v2
+        with:
+          # Export loaded secrets as environment variables
+          export-env: true
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
+          WORKFLOW_SECRET: op://${{ env.OPW_VAULT }}/record_name/key_name
+
+      - uses: actions/checkout@v4
+        with:
+          # [Required] Access token with `workflow` scope.
+          token: $WORKFLOW_SECRET
+
+      - name: GitHub Actions Version Updater
+        uses: saadmk11/github-actions-version-updater@v0.8.1
+
