@@ -26,7 +26,7 @@ jobs:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN }}
           WORKFLOW_SECRET: op://${{ env.OPW_VAULT }}/record_name/key_name
 
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           # [Required] Access token with `workflow` scope.
           token: $WORKFLOW_SECRET
