@@ -15,7 +15,7 @@ jobs:
       previous: ${{ steps.version.outputs.previous-version }} 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.head_ref }}   # checkout the correct branch name
           fetch-depth: 0                # fetch the whole repo history
@@ -27,7 +27,7 @@ jobs:
   coverage:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions-rs/toolchain@v1
         name: install rust toolchain
@@ -74,7 +74,7 @@ jobs:
   format:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions-rs/toolchain@v1
         name: install rust toolchain
@@ -95,7 +95,7 @@ jobs:
   testing:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions-rs/toolchain@v1
         name: install rust toolchain
@@ -120,7 +120,7 @@ jobs:
   documentation:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions-rs/toolchain@v1
         name: install rust toolchain
@@ -136,7 +136,7 @@ jobs:
   benchmark:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: actions-rs/toolchain@v1
         name: install rust toolchain
@@ -157,7 +157,7 @@ jobs:
   audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Load secret
         uses: 1password/load-secrets-action@v2
